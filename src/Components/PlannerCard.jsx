@@ -4,7 +4,7 @@ const PlannerCard = ({value, currentVote, emitVote}) => {
   const cardClasses = `notification has-text-weight-bold has-text-centered is-clickable ${toggleClass}`;
 
   return(
-    <div className="column is-5-mobile is-5-tablet is-3-desktop is-size-3">
+    <div className="column is-4-mobile is-5-tablet is-3-desktop is-size-3 is-size-4-mobile">
       <div 
         className={cardClasses} 
         data-value={value} 
