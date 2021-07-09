@@ -7,7 +7,7 @@ const PlannerIssues = ({numUsers, issue}) =>{
             <span className="button is-static">Issue:</span>
           </div>
           <div className="control is-expanded">
-              <input type="number" className="input" value={issue} readOnly/>
+              <input type="number" className="input has-text-centered has-text-weight-bold" value={issue} readOnly/>
           </div>
           <div className="control">
             <span className="button is-static">{numUsers} Connected</span>
