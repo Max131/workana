@@ -1,0 +1,18 @@
+{
+  "issue": [234],
+  "validVotes": [1, 2, 3, 5, 8, 13, 20, 40, "?"],
+  "members": [
+    {
+      "name": "Jhon (You)",
+      "vote": false
+    },
+    {
+      "name": "Jane",
+      "vote": false
+    },
+    {
+      "name": "Mark",
+      "vote": false
+    }
+  ]
+}
