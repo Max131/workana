@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/workana/static/css/main.e77e7fe5.chunk.css",
-    "main.js": "/workana/static/js/main.26887534.chunk.js",
-    "main.js.map": "/workana/static/js/main.26887534.chunk.js.map",
+    "main.js": "/workana/static/js/main.b79c2af6.chunk.js",
+    "main.js.map": "/workana/static/js/main.b79c2af6.chunk.js.map",
     "runtime-main.js": "/workana/static/js/runtime-main.42fb71e9.js",
     "runtime-main.js.map": "/workana/static/js/runtime-main.42fb71e9.js.map",
     "static/css/2.82623592.chunk.css": "/workana/static/css/2.82623592.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.82623592.chunk.css",
     "static/js/2.bb95b01c.chunk.js",
     "static/css/main.e77e7fe5.chunk.css",
-    "static/js/main.26887534.chunk.js"
+    "static/js/main.b79c2af6.chunk.js"
   ]
 }
