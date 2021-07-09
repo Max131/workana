@@ -4,7 +4,7 @@ const PlannerIssues = ({numUsers, issue}) =>{
       <div className="box has-background-dark">
         <div className="field has-addons">
           <div className="control">
-            <span className="button is-static">Vote issue:</span>
+            <span className="button is-static">Issue:</span>
           </div>
           <div className="control is-expanded">
               <input type="number" className="input" value={issue} readOnly/>
