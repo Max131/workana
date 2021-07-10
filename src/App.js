@@ -6,7 +6,7 @@ import Workana from './Components/Workana';
 
 const App = () =>{
   const [state, setState] = useState({isLoading: true, erros: null, data: {}})
-
+  //On mount get data from API
   useEffect( () => {
     const fetchData =  () => {
       axios.get('https://my-json-server.typicode.com/max131/workana/db')
@@ -17,6 +17,7 @@ const App = () =>{
   },[]);
 
   return(
+    //Check if data is loaded to mount the App or still loading
     state.isLoading 
       ?(<Loader />) 
       :(<Workana data={state.data} />)
