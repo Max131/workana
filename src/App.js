@@ -1,8 +1,7 @@
-import 'bulma/css/bulma.min.css';
-import 'bulma-pageloader/dist/css/bulma-pageloader.min.css';
-import './App.css';
+import './main.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import Loader from './Components/Loader'; 
 import Workana from './Components/Workana';
 
 const App = () =>{
@@ -19,7 +18,7 @@ const App = () =>{
 
   return(
     state.isLoading 
-      ?(<div className="pageloader is-active"><span className="title">Cargando...</span></div>) 
+      ?(<Loader />) 
       :(<Workana data={state.data} />)
   );
 }
