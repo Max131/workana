@@ -33,6 +33,27 @@ body{
 .header__title{
 	font-size: 1.5rem;
 	color: var(--color-title);
+	position: relative;
+	display: grid;
+	place-items: center;
+}
+.header__title::before,
+.header__title::after{
+	content: "";
+	display: block;
+	width: 4rem;
+	height:4rem;
+	border-radius: 100%;
+	position: absolute;
+	z-index: -1;
+}
+.header__title::before{
+	background: conic-gradient(red, orange, green, deepskyblue, red);
+}
+.header__title::after{
+	width: 2.5rem;
+	height: 2.5rem;
+	background: var(--color-bg);
 }
 .header__branding{
 	color: var(--color-primary);
