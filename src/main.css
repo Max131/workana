@@ -196,3 +196,20 @@ svg{
 		font-size: 2rem;
 	}	
 }
+.error{
+	height: 100vh;
+	width: 100vw;
+	display: grid;
+	place-items: center;
+	background: #F001;
+	padding: 2rem;
+}
+.error__text{
+	text-align: center;
+	font-size: 2rem;
+	font-weight: bold;
+	margin: 0;
+}
+.error__smiley{
+	font-size: 4rem;
+}
