@@ -7,8 +7,15 @@ import Logout from "./Logout";
 
 const Workana = ({ data, error, user, setLogin }) => {
   //Set the global state geted from App component
+  //console.log(data[0]);
+  //const [indexCurrentIssue] = data.filter(item => item.issue === issue);
+  //console.log(indexCurrentIssue);
+  //data.forEach(item => console.log(item.issue, issue));
+
   const [globalState, setGlobalState] = useState({ ...data });
-  const indexCurrentUser = globalState.members.findIndex(item => item._id === user.id);
+  const indexCurrentUser = globalState.members.findIndex(
+    (item) => item._id === user.id
+  );
   const currentUser = globalState.members[indexCurrentUser];
 
   //Function to toggle votes
@@ -54,6 +61,6 @@ const Workana = ({ data, error, user, setLogin }) => {
       <Error error={error} />
     )
   );
-}
+};
 
 export default Workana;

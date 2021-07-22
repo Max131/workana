@@ -1,7 +1,7 @@
 import "./main.css";
 import { useState, useEffect } from "react";
 //import axios from "axios";
-import data from "./db.json";
+import Data from "./db.json";
 import users from "./users.json";
 //
 import Loader from "./Components/Loader";
@@ -9,18 +9,28 @@ import Login from "./Components/Login.jsx";
 import Workana from "./Components/Workana";
 
 const App = () => {
+
+  //App State Start
   const [state, setState] = useState({
     isLoading: true,
     error: null,
-    data: {},
+    data: [],
   });
   const [loginUser, setLoginUser] = useState({
     id: null, 
     name: null,
   });
+  const [currentIssue, setCurrentIssue] = useState(null);
+  //App State End
+  
   const setLogin = ({_id, name}) => {
     setLoginUser({id: _id, name});
   };
+
+  const setIssue = (issue) => {
+    setCurrentIssue(issue);
+  };
+
   //On mount get data from API
   useEffect(() => {
     /*const fetchData = () => {
@@ -32,9 +42,7 @@ const App = () => {
         });
     };
     fetchData();*/
-    
-    setState({data: data, isLoading: false})
-
+    setState({data: Data, isLoading: false})
   }, []);
 
   return (
@@ -43,9 +51,9 @@ const App = () => {
       <Loader />
     ) : (
       loginUser.id? (
-          <Workana data={state.data} user={loginUser} error={state.error} setLogin={setLogin} />
+          <Workana data={currentIssue} user={loginUser} error={state.error} setLogin={setLogin} issue={currentIssue}/>
         ): (
-          <Login users={users.users} data={data} setLogin={setLogin} />
+          <Login users={users.users} data={state.data} setLogin={setLogin} setIssue={setIssue} />
         )
     )
   );

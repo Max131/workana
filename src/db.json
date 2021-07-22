@@ -1,21 +1,44 @@
-{
-  "issue": [234],
-  "validVotes": [1, 2, 3, 5, 8, 13, 20, 40, "?"],
-  "members": [
-    {
-      "_id": 1,
-      "name": "Jhon",
-      "vote": false
-    },
-    {
-      "_id": 2,
-      "name": "Jane",
-      "vote": false
-    },
-    {
-      "_id": 3,
-      "name": "Mark",
-      "vote": false
-    }
-  ]
-}
+[
+  {
+    "issue": 234,
+    "validVotes": [1, 2, 3, 5, 8, 13, 20, 40, "?"],
+    "members": [
+      {
+        "_id": 1,
+        "name": "Dwayne",
+        "vote": false
+      },
+      {
+        "_id": 2,
+        "name": "Jane",
+        "vote": false
+      },
+      {
+        "_id": 3,
+        "name": "Mark",
+        "vote": false
+      }
+    ]
+  },
+  {
+    "issue": 137,
+    "validVotes": [1, 2, 3, 5, 8, 13, 20, 40, "?"],
+    "members": [
+      {
+        "_id": 1,
+        "name": "Dwayne",
+        "vote": false
+      },
+      {
+        "_id": 2,
+        "name": "Jane",
+        "vote": false
+      },
+      {
+        "_id": 3,
+        "name": "Mark",
+        "vote": false
+      }
+    ]
+  }
+]
