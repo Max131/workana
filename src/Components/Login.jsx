@@ -1,26 +1,21 @@
-import {useRef} from "react";
-//import Workana from "./Workana";
+import {useState, useRef} from "react";
+import NewIssue from "./NewIssue";
 
-const Login = ({users, data, setLogin, setIssue}) =>{
+const Login = ({users, state, setLogin, setIssue, setState}) =>{
 	const loginName = useRef(null);
 	const issueNumber = useRef(null);
+	const [showIssueWindow, setShowIssueWindow] = useState(false);
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const [user] = users.filter(user => user._id === +loginName.current.value);
-		const [issue] = data.filter(issue => issue.issue === +issueNumber.current.value);
+		const [user] = users.filter(user => user._id === loginName.current.value);
+		const [issue] = state.data.filter(issue => issue.issue === +issueNumber.current.value);
 		if(!user || !issue) return;
 		setLogin(user);
 		setIssue(issue);
 	};
 
-	const handleNewIssue = () => {
-		const newIssueNumber = Math.round(Math.random() * (220 - 150 + 1) + 150);
-		const newIssue = { 
-			...data[0], 
-			issue: newIssueNumber, 
-			members: [...users]
-		};
-		console.log(newIssue);
+	const handleClickNewIssue = () => {
+		setShowIssueWindow(!showIssueWindow);
 	}
 
 	const SelectOption = ({value, text}) => {
@@ -43,13 +38,14 @@ const Login = ({users, data, setLogin, setIssue}) =>{
 					</select>
 					<select name="issue" id="issue" className="loginForm__select" ref={issueNumber}>
 						<option>🔢</option>
-						{
-							data.map(issueNumber => <SelectOption value={issueNumber.issue} text={issueNumber.issue} key={issueNumber.issue} />)
+						{	
+							state.data.map(issueNumber => <SelectOption value={issueNumber.issue} text={issueNumber.issue} key={issueNumber.issue} />)
 						}
 					</select>
 					<button className="loginForm__button" type="submit">Enter</button>
-					<button className="loginForm__button btnIssue" type="button" onClick={handleNewIssue}>New Issue</button>
+					<button className="loginForm__button btnIssue" type="button" onClick={handleClickNewIssue}>New Issue</button>
 				</form>
+				{showIssueWindow && <NewIssue setShowIssueWindow={setShowIssueWindow} setState={setState} data={state} users={users} />}
 			</div>
 		</div>
 	);

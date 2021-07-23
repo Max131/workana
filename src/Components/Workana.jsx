@@ -11,8 +11,9 @@ const Workana = ({ data, error, user, setLogin }) => {
   //const [indexCurrentIssue] = data.filter(item => item.issue === issue);
   //console.log(indexCurrentIssue);
   //data.forEach(item => console.log(item.issue, issue));
-
+  //console.log(globalState);
   const [globalState, setGlobalState] = useState({ ...data });
+  const [allHasVoted, setAllHasVoted] = useState(false);
   const indexCurrentUser = globalState.members.findIndex(
     (item) => item._id === user.id
   );
@@ -22,6 +23,7 @@ const Workana = ({ data, error, user, setLogin }) => {
   const emitVote = (cardValue) => {
     currentUser.vote = currentUser.vote === cardValue ? false : cardValue;
     setGlobalState({ ...globalState }, currentUser);
+    setAllHasVoted(globalState.members.every(user => user.vote));
   };
 
   return (
@@ -52,9 +54,11 @@ const Workana = ({ data, error, user, setLogin }) => {
         />
         <div className="users">
           {/* Load the users */}
-          {globalState.members.map((member, index) => (
-            <PlannerUser user={member} current={currentUser} key={index} />
-          ))}
+          {
+            globalState.members.map((member, index) => (
+              <PlannerUser user={member} current={currentUser} allHasVoted={allHasVoted} key={index} />
+            ))
+          }
         </div>
       </>
     ) : (

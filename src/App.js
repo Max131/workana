@@ -1,7 +1,6 @@
 import "./main.css";
 import { useState, useEffect } from "react";
-//import axios from "axios";
-import Data from "./db.json";
+//import Data from "./db.json";
 import users from "./users.json";
 //
 import Loader from "./Components/Loader";
@@ -33,18 +32,22 @@ const App = () => {
 
   //On mount get data from API
   useEffect(() => {
-    /*const fetchData = () => {
-      axios
-        .get("https://my-json-server.typicode.com/max131/workana/db")
-        .then((res) => setState({ data: res.data, isLoading: false }))
-        .catch((error) => {
-          setState({ isLoading: false, error: error.message, data: null });
-        });
-    };
-    fetchData();*/
-    setState({data: Data, isLoading: false})
-  }, []);
+    const getData = async () => {
+      await fetch("https://ppoker-5ad4.restdb.io/rest/issues",{
+              headers: {
+                    "x-apikey": "60f8824d49cd3a5cfbd22ad6",
+                    "Cache-Control": "no-cache",
+                    "content-type": "application/json"
+                }
+              })
+            .then(res => res.json())
+            .then(data => setState({data, isLoading: false}))
+            .catch(error => setState({isLoading: false, error: error.message, data: null}));
+    }
+    getData();
 
+    //setState({data: Data, isLoading: false})
+  }, []);
   return (
     //Check if data is loaded to mount the App or still loading
     state.isLoading ? (
@@ -53,7 +56,7 @@ const App = () => {
       loginUser.id? (
           <Workana data={currentIssue} user={loginUser} error={state.error} setLogin={setLogin} issue={currentIssue}/>
         ): (
-          <Login users={users.users} data={state.data} setLogin={setLogin} setIssue={setIssue} />
+          <Login users={state.data[0].members} state={state} setState={setState} setLogin={setLogin} setIssue={setIssue} />
         )
     )
   );
