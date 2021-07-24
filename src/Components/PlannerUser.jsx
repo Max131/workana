@@ -2,9 +2,8 @@ import { ReactComponent as CheckedIcon } from "./icons/check-square.svg";
 import { ReactComponent as UncheckedIcon } from "./icons/checkbox.svg";
 
 const PlannerUser = ({ user, current, allHasVoted }) => {
-  const isCurrent = user._id === current._id; 
-  //const allHasVoted = users.every(user => user.vote);
-  //console.log(allHasVoted);
+  const isCurrent = user.id === current.id; 
+  
   return (
     <div 
       className={user.vote ? "user user--voted" : "user"} 

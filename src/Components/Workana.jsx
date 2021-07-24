@@ -6,16 +6,10 @@ import Error from "./Error.jsx";
 import Logout from "./Logout";
 
 const Workana = ({ data, error, user, setLogin }) => {
-  //Set the global state geted from App component
-  //console.log(data[0]);
-  //const [indexCurrentIssue] = data.filter(item => item.issue === issue);
-  //console.log(indexCurrentIssue);
-  //data.forEach(item => console.log(item.issue, issue));
-  //console.log(globalState);
   const [globalState, setGlobalState] = useState({ ...data });
   const [allHasVoted, setAllHasVoted] = useState(false);
   const indexCurrentUser = globalState.members.findIndex(
-    (item) => item._id === user.id
+    (item) => item.id === user.id
   );
   const currentUser = globalState.members[indexCurrentUser];
 

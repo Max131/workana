@@ -5,10 +5,13 @@ const Login = ({users, state, setLogin, setIssue, setState}) =>{
 	const loginName = useRef(null);
 	const issueNumber = useRef(null);
 	const [showIssueWindow, setShowIssueWindow] = useState(false);
+	
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const [user] = users.filter(user => user._id === loginName.current.value);
+
+		const [user] = users.filter(user => +user.id === +loginName.current.value);
 		const [issue] = state.data.filter(issue => issue.issue === +issueNumber.current.value);
+
 		if(!user || !issue) return;
 		setLogin(user);
 		setIssue(issue);
@@ -33,7 +36,7 @@ const Login = ({users, state, setLogin, setIssue, setState}) =>{
 					<select name="user" id="user" className="loginForm__select" ref={loginName}>
 						<option>👤</option>
 						{
-							users.map(user => <SelectOption value={user._id} text={user.name} key={user._id} />)
+							users.map(user => <SelectOption value={user.id} text={user.name} key={user.id} />)
 						}
 					</select>
 					<select name="issue" id="issue" className="loginForm__select" ref={issueNumber}>
