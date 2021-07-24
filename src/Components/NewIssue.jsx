@@ -1,4 +1,4 @@
-import {useState, useRef} from "react";
+import {useRef} from "react";
 
 const NewIssue = ({setShowIssueWindow, setState, data, users}) => {
 	
@@ -22,11 +22,11 @@ const NewIssue = ({setShowIssueWindow, setState, data, users}) => {
 		setShowIssueWindow(false);
 	}
 
-	const IssueExists = () => {
+	/*const IssueExists = () => {
 		return (
 			<p className="issueExists">The issue already exists</p>
 		);
-	}
+	}*/
 
 	return(
 		<div className="newIssue">
