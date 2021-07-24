@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 //import Users from "./users.json";
 
 import Loader from "./Components/Loader";
-import Login from "./Components/Login.jsx";
+import Login from "./Components/Login";
 import Workana from "./Components/Workana";
 
 const App = () => {
