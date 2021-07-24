@@ -1,8 +1,10 @@
 import "./main.css";
 import { useState, useEffect } from "react";
-import Data from "./db.json";
-import Users from "./users.json";
-//
+
+//Test data
+//import Data from "./db.json";
+//import Users from "./users.json";
+
 import Loader from "./Components/Loader";
 import Login from "./Components/Login.jsx";
 import Workana from "./Components/Workana";
@@ -11,7 +13,7 @@ const App = () => {
 
   //App State Start
   //Default state with all the data
-  const [state, setState] = useState({
+  const [apiData, setApiData] = useState({
     isLoading: true,
     error: null,
     data: [],
@@ -35,11 +37,6 @@ const App = () => {
     setLoginUser({id, name});
   };
 
-  //Set the current Issue
-  const setIssue = (issue) => {
-    setCurrentIssue(issue);
-  };
-
   useEffect(() => {
     //On mount get data from API
     const getData = async () => {
@@ -51,32 +48,34 @@ const App = () => {
                 }
               })
             .then(res => res.json())
-            .then(data => setState({data, isLoading: false}))
-            .catch(error => setState({isLoading: false, error: error.message, data: null}));
+            .then(data => setApiData({data, isLoading: false}))
+            .catch(error => setApiData({isLoading: false, error: error.message, data: null}));
     }
-    //getData();
+    getData();
 
     //On mount get users from API
     const getUsers = async () => {
       await fetch("https://api.jsonbin.io/b/60fb5e0fa917050205cecfa2/latest")
             .then(res => res.json())
-            .then(users => console.log("Users: ", users))
+            .then(users => setUsers(users))
             .catch(error => console.log("Error: ",error));
     }
-    //getUsers();
+    getUsers();
 
-    setState({data: Data, isLoading: false})
-    setUsers(Users);
+    //Set test data
+    //setApiData({data: Data, isLoading: false})
+    //setUsers(Users);
   }, []);
   return (
     //Check if data is loaded to mount the App or still loading
-    state.isLoading ? (
+    apiData.isLoading ? (
       <Loader />
     ) : (
+      //Check if a user is logged in to load de main component or load de login component
       loginUser.id? (
-          <Workana data={currentIssue} user={loginUser} error={state.error} setLogin={setLogin} issue={currentIssue}/>
-        ): (
-          <Login users={Users.users} state={state} setState={setState} setLogin={setLogin} setIssue={setIssue} />
+          <Workana data={currentIssue} user={loginUser} error={apiData.error} setLogin={setLogin} issue={currentIssue}/>
+        ) : (
+          <Login users={users.users} state={apiData} setState={setApiData} setLogin={setLogin} setIssue={setCurrentIssue} />
         )
     )
   );

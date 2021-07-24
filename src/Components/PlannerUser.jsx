@@ -11,7 +11,7 @@ const PlannerUser = ({ user, current, allHasVoted }) => {
     >
       <div>{user.vote ? <CheckedIcon /> : <UncheckedIcon />}</div>
       <div>{user.name} {isCurrent && '(You)'}</div>
-      <div>{user.vote && allHasVoted? user.vote : "-"}</div>
+      <div>{allHasVoted? user.vote : isCurrent && user.vote? user.vote: "-"}</div>
     </div>
   );
 };

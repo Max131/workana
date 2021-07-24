@@ -1,16 +1,23 @@
 import {useState, useRef} from "react";
 import NewIssue from "./NewIssue";
 
-const Login = ({users, state, setLogin, setIssue, setState}) =>{
+const Login = ({users, state, setState, setLogin, setIssue}) =>{
 	const loginName = useRef(null);
 	const issueNumber = useRef(null);
 	const [showIssueWindow, setShowIssueWindow] = useState(false);
-	
+
+	let votedIssues = {};
+
+	state.data.forEach(issue => {
+		let voted = (issue.members.every(member => member.vote !== false));
+		votedIssues[issue.issue] = voted;
+	});
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const [user] = users.filter(user => +user.id === +loginName.current.value);
-		const [issue] = state.data.filter(issue => issue.issue === +issueNumber.current.value);
+		const [issue] = state.data.filter(issue => +issue.issue === +issueNumber.current.value);
 
 		if(!user || !issue) return;
 		setLogin(user);
@@ -21,9 +28,9 @@ const Login = ({users, state, setLogin, setIssue, setState}) =>{
 		setShowIssueWindow(!showIssueWindow);
 	}
 
-	const SelectOption = ({value, text}) => {
+	const SelectOption = ({value, text, type}) => {
 		return(
-			<option value={value} key={value}>{text}</option>
+			<option value={value} key={value}>{text}{votedIssues[value] && " (Voted)"}</option>
 		);
 	}
 
