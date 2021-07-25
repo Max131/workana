@@ -1,18 +1,32 @@
 import {useState, useRef} from "react";
 import NewIssue from "./NewIssue";
 
+/**
+ * Component to login in the planning poker
+ * @param  {array} 		options.users			Array of users
+ * @param  {object} 	options.state    	Object with all app data
+ * @param  {function} options.setState 	Function to set the app data
+ * @param  {function} options.setLogin 	Function to set the current user
+ * @param  {function} options.setIssue 	Function to set the issue to vote
+ * @return {component}                  Login component
+ */
 const Login = ({users, state, setState, setLogin, setIssue}) =>{
 	const loginName = useRef(null);
 	const issueNumber = useRef(null);
 	const [showIssueWindow, setShowIssueWindow] = useState(false);
 
-	let votedIssues = {};
+	let issueIsVoted = {};
 
 	state.data.forEach(issue => {
 		let voted = (issue.members.every(member => member.vote !== false));
-		votedIssues[issue.issue] = voted;
+		issueIsVoted[issue.issue] = voted;
 	});
 
+	/**
+	 * Handle if is selected user & issue
+	 * @param  {event} e 	Submit event
+	 * @return {null}
+	 */
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -24,13 +38,23 @@ const Login = ({users, state, setState, setLogin, setIssue}) =>{
 		setIssue(issue);
 	};
 
+	/**
+	 * Show the new issue window
+	 * @return {null} 
+	 */
 	const handleClickNewIssue = () => {
 		setShowIssueWindow(!showIssueWindow);
 	}
 
-	const SelectOption = ({value, text, type}) => {
+	/**
+	 * Component to set options in a select
+	 * @param  {int}		options.value Value of the option component
+	 * @param  {string} options.text  Text of the option
+	 * @return {Component}            Option in select
+	 */
+	const SelectOption = ({value, text}) => {
 		return(
-			<option value={value} key={value}>{text}{votedIssues[value] && " (Voted)"}</option>
+			<option value={value} key={value}>{text}{issueIsVoted[value] && " (Voted)"}</option>
 		);
 	}
 
@@ -60,4 +84,5 @@ const Login = ({users, state, setState, setLogin, setIssue}) =>{
 		</div>
 	);
 }
+
 export default Login;

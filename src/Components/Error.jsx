@@ -1,3 +1,8 @@
+/**
+ * Error component
+ * @param  {string} options.error Error message
+ * @return {null}
+ */
 const Error = ({ error }) => {
 	return (
 		<div className="error">

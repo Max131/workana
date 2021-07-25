@@ -1,9 +1,22 @@
 import {useRef} from "react";
 
+/**
+ * Add a new Issue to vote
+ * @param  {function} options.setShowIssueWindow Function to hide the component
+ * @param  {function} options.setState           Function to set the app current issue
+ * @param  {object}		options.data               Global state
+ * @param  {array}		options.users              Array of the app users
+ * @return {null}
+ */
 const NewIssue = ({setShowIssueWindow, setState, data, users}) => {
 	
 	const issueNumber = useRef(null)
-
+	
+	/**
+	 * Check if the issue exists, if not, add a new issue
+	 * @param  {event} e 	Submit event
+	 * @return {null}
+	 */
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -41,6 +54,10 @@ const NewIssue = ({setShowIssueWindow, setState, data, users}) => {
 		setShowIssueWindow(false);
 	}
 
+	/**
+	 * Cancel add new issue
+	 * @return {null}
+	 */
 	const handleClickCancel = () => {
 		setShowIssueWindow(false);
 	}

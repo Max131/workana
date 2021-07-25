@@ -5,6 +5,14 @@ import PlannerUser from "./PlannerUser";
 import Error from "./Error.jsx";
 import Logout from "./Logout";
 
+/**
+ * Main section of the App, the votes are here
+ * @param  {object}   options.data     Current issue data
+ * @param  {string}   options.error    Error message
+ * @param  {object}   options.user     Current user
+ * @param  {function} options.setLogin Function to login current user
+ * @return {null}
+ */
 const Workana = ({ data, error, user, setLogin }) => {
   //Set issue state
   const [globalState, setGlobalState] = useState({ ...data });
@@ -17,14 +25,21 @@ const Workana = ({ data, error, user, setLogin }) => {
   //Set the current user logged in
   const currentUser = globalState.members[indexCurrentUser];
 
-  //Function to toggle votes
+  /**
+   * Function to set user vote
+   * @param  {string} cardValue Value of the current voted card
+   * @return {null}           
+   */
   const emitVote = (cardValue) => {
     currentUser.vote = currentUser.vote === cardValue ? false : cardValue;
     setGlobalState({ ...globalState }, currentUser);
   };
 
-  //Check if all the memebers has voted on issue state change
-  //Update the API with the new data
+  /**
+   * Check if all the memebers has voted on issue state change &
+   * Update the API with the new data
+   * @return {null}
+   */
   useEffect(() => {
     setAllHasVoted(globalState.members.every(user => user.vote));
     const updateIssue = async () => {

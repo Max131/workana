@@ -1,3 +1,7 @@
+/**
+ * Main loader component
+ * @return {null} 
+ */
 const Loader = () => {
 	return (
 		<div className="loader">
