@@ -7,15 +7,15 @@ import Logout from "./Logout";
 
 /**
  * Main section of the App, the votes are here
- * @param  {object}   options.data     Current issue data
+ * @param  {object}   options.currentIssue     Current issue data
  * @param  {string}   options.error    Error message
  * @param  {object}   options.user     Current user
  * @param  {function} options.setLogin Function to login current user
  * @return {null}
  */
-const Workana = ({ data, error, user, setLogin }) => {
+const Workana = ({ currentIssue, error, user, setLogin }) => {
   //Set issue state
-  const [globalState, setGlobalState] = useState({ ...data });
+  const [globalState, setGlobalState] = useState({ ...currentIssue });
   //Set if all the members has voted the issue
   const [allHasVoted, setAllHasVoted] = useState(false);
   //Find the curren user

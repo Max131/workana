@@ -116,7 +116,7 @@ const App = () => {
     ) : (
       //Check if a user is logged in to load de main component or load de login component
       loginUser.id? (
-          <Workana data={currentIssue} user={loginUser} error={apiData.error} setLogin={setLogin} issue={currentIssue}/>
+          <Workana currentIssue={currentIssue} user={loginUser} error={apiData.error} setLogin={setLogin} />
         ) : (
           <Login users={users} state={apiData} setState={setApiData} setLogin={setLogin} setIssue={setCurrentIssue} />
         )
