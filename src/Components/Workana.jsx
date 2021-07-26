@@ -41,7 +41,6 @@ const Workana = ({ data, error, user, setLogin }) => {
    * @return {null}
    */
   useEffect(() => {
-    setAllHasVoted(globalState.members.every(user => user.vote));
     const updateIssue = async () => {
       await fetch(`https://todos-9a65.restdb.io/rest/issues/${globalState._id}`, {
                   method: "PUT",
@@ -59,6 +58,7 @@ const Workana = ({ data, error, user, setLogin }) => {
               .catch(error => alert(error));
     }
     updateIssue();
+    setAllHasVoted(globalState.members.every(user => user.vote));
     //console.log(globalState._id);
   },[globalState]);
 
