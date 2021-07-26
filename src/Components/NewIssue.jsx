@@ -35,10 +35,10 @@ const NewIssue = ({setShowIssueWindow, setState, data, users}) => {
 
 		setState({...data, data: [...data.data, newIssue]});
 		const putIssue = async ()=> {
-			await fetch("https://ppoker-5ad4.restdb.io/rest/issues", {
+			await fetch("https://todos-9a65.restdb.io/rest/issues", {
 									method: "POST",
 									headers: {
-										"x-api-key": "60f8824d49cd3a5cfbd22ad6",
+										"x-api-key": "60f158b149cd3a5cfbd2291f",
 										"cache-control": "no-cache",
 										"content-type": "application/json"
 									},

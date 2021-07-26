@@ -40,14 +40,15 @@ const App = () => {
     setLoginUser({id, name});
   };
 
+  
   /**
    * Get data from API and set the App state
    * @return {null} 
    */
   const getData = async () => {
-    await fetch("https://ppoker-5ad4.restdb.io/rest/issues",{
+    await fetch("https://todos-9a65.restdb.io/rest/issues",{
             headers: {
-                  "x-apikey": "60fdf5c149cd3a5cfbd22bfe",
+                  "x-apikey": "60f158b149cd3a5cfbd2291f",
                   "Cache-Control": "no-cache",
                   "content-type": "application/json"
               }
@@ -67,7 +68,7 @@ const App = () => {
   useEffect(() => {
     //On mount get data from API
     getData();
-
+    let serverEvent = new EventSource("https://todos-9a65.restdb.io/realtime?apikey=60f158b149cd3a5cfbd2291f");
     //On mount get users from API
     const getUsers = async () => {
       await fetch("https://api.jsonbin.io/b/60fb5e0fa917050205cecfa2/latest")
@@ -77,21 +78,23 @@ const App = () => {
     }
     getUsers();
 
-    //Set test data
-    //setApiData({data: Data, isLoading: false})
-    //setUsers(Users);
-  }, []);
-
-  /*let serverEvent = new EventSource("https://ppoker-5ad4.restdb.io/realtime?apikey=5d0a79cc17a4ded484585ac4a4e360eaf330f");
-
-  serverEvent.addEventListener('put', (e) => {
+    serverEvent.addEventListener('put', (e) => {
     console.log(e.data);
     getData();
   }, false);
   serverEvent.addEventListener('post', (e) => {
     console.log(e.data);
     getData();
-  }, false);*/
+  }, false);
+
+    //Set test data
+    //setApiData({data: Data, isLoading: false})
+    //setUsers(Users);
+    return () => {
+          serverEvent.close();
+        };
+  }, [apiData]);
+
 
   return (
     //Check if data is loaded to mount the App or still loading

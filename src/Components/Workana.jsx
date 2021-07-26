@@ -43,10 +43,10 @@ const Workana = ({ data, error, user, setLogin }) => {
   useEffect(() => {
     setAllHasVoted(globalState.members.every(user => user.vote));
     const updateIssue = async () => {
-      await fetch(`https://ppoker-5ad4.restdb.io/rest/issues/${globalState._id}`, {
+      await fetch(`https://todos-9a65.restdb.io/rest/issues/${globalState._id}`, {
                   method: "PUT",
                   headers: {
-                    "x-api-key": "60fdf5c149cd3a5cfbd22bfe",
+                    "x-api-key": "60f158b149cd3a5cfbd2291f",
                     "cache-control": "no-cache",
                     "content-type": "application/json"
                   },
@@ -54,7 +54,7 @@ const Workana = ({ data, error, user, setLogin }) => {
                   credentials: "same-origin"})
               .then(res => res.json())
               .then(data => {
-                  data.hasOwnProperty("_id")? console.info("All ok"): alert (`Error: ${data.message}`)
+                  data.hasOwnProperty("_id")? console.info("Updated vote"): alert (`Error: ${data.message}`)
                 })
               .catch(error => alert(error));
     }
