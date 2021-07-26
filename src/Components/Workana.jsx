@@ -46,7 +46,7 @@ const Workana = ({ data, error, user, setLogin }) => {
       await fetch(`https://ppoker-5ad4.restdb.io/rest/issues/${globalState._id}`, {
                   method: "PUT",
                   headers: {
-                    "x-api-key": "60f8824d49cd3a5cfbd22ad6",
+                    "x-api-key": "60fdf5c149cd3a5cfbd22bfe",
                     "cache-control": "no-cache",
                     "content-type": "application/json"
                   },

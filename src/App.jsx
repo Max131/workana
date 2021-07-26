@@ -47,13 +47,16 @@ const App = () => {
   const getData = async () => {
     await fetch("https://ppoker-5ad4.restdb.io/rest/issues",{
             headers: {
-                  "x-apikey": "60f8824d49cd3a5cfbd22ad6",
+                  "x-apikey": "60fdf5c149cd3a5cfbd22bfe",
                   "Cache-Control": "no-cache",
                   "content-type": "application/json"
               }
             })
           .then(res => res.json())
-          .then(data => setApiData({data, isLoading: false}))
+          .then(data => {
+                  if(data.message) throw data.message
+                  setApiData({data, isLoading: false})
+                })
           .catch(error => setApiData({isLoading: false, error: error.message, data: null}));
   }
 
@@ -78,6 +81,17 @@ const App = () => {
     //setApiData({data: Data, isLoading: false})
     //setUsers(Users);
   }, []);
+
+  /*let serverEvent = new EventSource("https://ppoker-5ad4.restdb.io/realtime?apikey=5d0a79cc17a4ded484585ac4a4e360eaf330f");
+
+  serverEvent.addEventListener('put', (e) => {
+    console.log(e.data);
+    getData();
+  }, false);
+  serverEvent.addEventListener('post', (e) => {
+    console.log(e.data);
+    getData();
+  }, false);*/
 
   return (
     //Check if data is loaded to mount the App or still loading
