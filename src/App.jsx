@@ -46,7 +46,7 @@ const App = () => {
    * @return {null} 
    */
   const getData = async () => {
-    await fetch("https://todos-9a65.restdb.io/rest/issues",{
+    await fetch("https://todos-9a65.restdb.io/rest/issues", {
             headers: {
                   "x-apikey": "60f158b149cd3a5cfbd2291f",
                   "Cache-Control": "no-cache",
@@ -62,39 +62,52 @@ const App = () => {
   }
 
   /**
+   * Get users from API and set the user state
+   * @return {null}
+   */
+  const getUsers = async () => {
+      await fetch("https://todos-9a65.restdb.io/rest/pusers", {
+            headers: {
+                  "x-apikey": "60f158b149cd3a5cfbd2291f",
+                  "Cache-Control": "no-cache",
+                  "content-type": "application/json"
+              }
+            })
+            .then(res => res.json())
+            .then(users => setUsers(users))
+            .catch(error => console.log("Error: ",error));
+  }
+  /**
+   * Connect to API realtime server for data changes and load the new data
+   * @return {null}
+   */
+  const updateOnServerChanges = () => {
+    let serverEvent = new EventSource("https://todos-9a65.restdb.io/realtime?apikey=60f158b149cd3a5cfbd2291f");
+    serverEvent.addEventListener('put', (e) => {
+      console.log(e.data);
+      getData();
+    }, false);
+    serverEvent.addEventListener('post', (e) => {
+      console.log(e.data);
+      getData();
+    }, false);
+
+    window.addEventListener('beforeunload', () => serverEvent.close());
+  }
+
+  /**
    * Get app data & users on component mount
    * @return {null}
    */
   useEffect(() => {
-    //On mount get data from API
     getData();
-    let serverEvent = new EventSource("https://todos-9a65.restdb.io/realtime?apikey=60f158b149cd3a5cfbd2291f");
-    //On mount get users from API
-    const getUsers = async () => {
-      await fetch("https://api.jsonbin.io/b/60fb5e0fa917050205cecfa2/latest")
-            .then(res => res.json())
-            .then(users => setUsers(users))
-            .catch(error => console.log("Error: ",error));
-    }
     getUsers();
-
-    serverEvent.addEventListener('put', (e) => {
-    console.log(e.data);
-    getData();
-  }, false);
-  serverEvent.addEventListener('post', (e) => {
-    console.log(e.data);
-    getData();
-  }, false);
-
+    updateOnServerChanges();
+    
     //Set test data
     //setApiData({data: Data, isLoading: false})
     //setUsers(Users);
-    return () => {
-          serverEvent.close();
-        };
-  }, [apiData]);
-
+  }, []);
 
   return (
     //Check if data is loaded to mount the App or still loading
@@ -105,7 +118,7 @@ const App = () => {
       loginUser.id? (
           <Workana data={currentIssue} user={loginUser} error={apiData.error} setLogin={setLogin} issue={currentIssue}/>
         ) : (
-          <Login users={users.users} state={apiData} setState={setApiData} setLogin={setLogin} setIssue={setCurrentIssue} />
+          <Login users={users} state={apiData} setState={setApiData} setLogin={setLogin} setIssue={setCurrentIssue} />
         )
     )
   );
