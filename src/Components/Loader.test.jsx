@@ -1,11 +1,12 @@
-import {create} from "react-test-renderer";
+import "@testing-library/jest-dom";
+import { render } from '@testing-library/react';
 import Loader from "./Loader";
 
 let component;
 
 describe("<Loader />", () => {
 	beforeAll(() => {
-		component = create (<Loader />);
+		component = render(<Loader />);
 	});
 
 	it("Loader renders correct", () => {
