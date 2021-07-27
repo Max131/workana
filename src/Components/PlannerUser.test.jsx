@@ -1,19 +1,21 @@
-import { create } from "react-test-renderer";
+import {create} from "react-test-renderer";
 import PlannerUser from "./PlannerUser";
 
 let component;
 const user = {
-		name: "John",
-		id: 13
+	id: 13,
+	name: "John"
 }
-
+const user2 = {
+	id: 15,
+	name: "Jane"
+}
 describe("<PlannerUser />", () => {
-		beforeAll(() => {
-				component = create(<PlannerUser user={user} current={user} allHasVoted={true}/>);
-		});
+	beforeAll(() => {
+		component = create (<PlannerUser user={user} current={user2}  allHasVoted={true}/>);
+	});
 
-		it("Component render Ok", () => { 
-				expect(component).toBeDefined();
-		});
+	it("PlannerUser renders correct", () => {
+		expect(component).toBeDefined();
+	})
 });
-
